@@ -1,0 +1,124 @@
+Define a package named gradepack. The gradepack consists of a class named operations.
+The operations class consists of the methods to compute the average, minimum, maximum,
+median and standard deviation.
+Create a class named GradesStatistics, which reads in n grades
+(of int between 0 and 100, inclusive) and displays
+the average, minimum, maximum, median and standard deviation by importing the
+gradepack package.  (Pass the grades information to the methods in the operations class.)
+Display the floating-point values upto 2 decimal places. Your output shall look like:
+
+CODE:
+
+package gradepack;
+public class Operations
+{
+public double average(int arr[])
+{
+int sum=0;
+double avg;
+int x=arr.length;
+for(int i=0;i&lt;x;i++)
+{
+sum=sum+arr[i];
+}
+avg=(sum)/x;
+return avg;
+}
+
+public int minimum(int arr[])
+{
+int min=arr[0];
+int l=arr.length;
+for(int i=0;i&lt;l;i++)
+{
+if(min&gt;arr[i])
+min=arr[i];
+}
+return min;
+}
+
+public int maximum(int arr[])
+{
+int max=arr[0];
+int l=arr.length;
+for(int i=0;i&lt;l;i++)
+{
+if(max&lt;arr[i])
+max=arr[i];
+}
+return max;
+}
+
+public double median(int arr[])
+{
+int l=arr.length;
+double med;
+
+int m;
+if(l%2==0)
+{
+m=l/2;
+med=(double)arr[m];
+}
+else
+{
+m=(l+1)/2;
+med=(double)arr[m];
+}
+return med;
+}
+
+public double standard_deviation(int arr[])
+{
+int l=arr.length;
+int sum=0;
+double s=0.0;
+for(int i=0;i&lt;l;i++)
+sum=sum+arr[i];
+double mean=sum/l;
+for(int i=0;i&lt;l;i++)
+s=s+Math.pow(arr[i]-mean,2);
+return Math.sqrt(s/l);
+}
+}
+
+GradeStatistics:
+import gradepack.Operations;
+import java.util.*;
+class GradeStatistics
+{
+public static void main(String args[])
+{
+Scanner sc=new Scanner(System.in);
+System.out.print(&quot;Enter the number of students: &quot;);
+int l=sc.nextInt();
+int[] arr=new int[l];
+for(int i=0;i&lt;l;i++)
+{
+
+System.out.print(&quot;Enter the grade for student &quot;+(i+1)+&quot;: &quot;);
+arr[i]=sc.nextInt();
+if(arr[i] &gt;0 &amp;&amp; arr[i]&lt;100)
+continue;
+else
+break;
+}
+System.out.print(&quot;The grades are: [&quot;);
+for(int i=0;i&lt;l;i++)
+{
+if(i==(l-1))
+System.out.println(arr[i]+&quot;]&quot;);
+else
+System.out.print(arr[i]+&quot;, &quot;);
+}
+Operations op=new Operations();
+
+System.out.printf(&quot;The average: %.2f\n&quot;,op.average(arr));
+System.out.printf(&quot;The median: %.2f\n&quot;,op.median(arr));
+System.out.println(&quot;The minimum: &quot;+op.minimum(arr));
+System.out.println(&quot;The maximum: &quot;+op.maximum(arr));
+System.out.printf(&quot;The standard deviation is:
+
+%.2f&quot;,op.standard_deviation(arr));
+}
+}
